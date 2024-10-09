@@ -1,22 +1,30 @@
 version: "3.8"
 services:
   app:
-    image: cadence:01
-    container_name: cadence
+    image: gitlab:01
+    container_name: gitlab
     build: 
       context: .
       network: host
       dockerfile: Dockerfile
       args:
-        - DEV_cadence=1
+        - DEV_gitlab=1
     ipc: host
+    hostname: 'gitlab.example.com'
     environment:
     #- AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
     #- AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     - HOME=/app
-    - DATA_ROOT=/app/data
+    - DATA=/app/data
     ports:
       - "8888:8888"
+      - "80:80"
+      - "443:443"
+      - "22:22"
     volumes:
       - .:/app
-      - $HOME/data:/app/data
+      - $HOME/data/gitlabdata:/app/data
+      - $HOME/data/gitlabdata/config:/etc/gitlab
+      - $HOME/data/gitlabdata/logs:/var/log/gitlab
+      - $HOME/data/gitlabdata/data:/var/opt/gitlab
+    shm_size: '256m'

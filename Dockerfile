@@ -1,6 +1,6 @@
-FROM python:3.11 AS base
+FROM gitlab/gitlab-ce:17.2.8-ce.0 AS base
 
-ARG DEV_cadence
+ARG DEV_gitlab
 
 ENV \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -22,20 +22,20 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # Pip and pipenv
-RUN pip install --upgrade pip
-RUN pip install pipenv
+# RUN pip install --upgrade pip
+# RUN pip install pipenv
 
 # Some package stuff
 COPY setup.py ./
-COPY src/cadence/__init__.py src/cadence/__init__.py
+COPY src/gitlab/__init__.py src/gitlab/__init__.py
 
 # Install dependencies
-COPY Pipfile Pipfile.lock ./
-RUN --mount=source=.git,target=.git,type=bind \
-    pipenv install --system --deploy --ignore-pipfile --dev
+# COPY Pipfile Pipfile.lock ./
+# RUN --mount=source=.git,target=.git,type=bind \
+#     pipenv install --system --deploy --ignore-pipfile --dev
 
 # Run the jupyter lab server
-RUN mkdir -p /run_scripts
-COPY /bash_scripts/docker_entry /run_scripts
-RUN chmod +x /run_scripts/*
-CMD ["/bin/bash", "/run_scripts/docker_entry"]
+# RUN mkdir -p /run_scripts
+# COPY /bash_scripts/docker_entry /run_scripts
+# RUN chmod +x /run_scripts/*
+# CMD ["/bin/bash", "/run_scripts/docker_entry"]
