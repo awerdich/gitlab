@@ -10,7 +10,6 @@ services:
       args:
         - DEV_gitlab=1
     ipc: host
-    hostname: 'gitlab.example.com'
     environment:
     #- AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
     #- AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
