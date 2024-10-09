@@ -1,0 +1,26 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "8124fffc10346bbd1aa786cd8084ba383c1188dd12aed1cddfd912d48001ddb3"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_full_version": "3.11.8",
+            "python_version": "3.11"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "gitlab": {
+            "editable": true,
+            "file": "."
+        }
+    },
+    "develop": {}
+}
