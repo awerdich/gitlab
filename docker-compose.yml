@@ -3,6 +3,7 @@ services:
   app:
     image: gitlab:01
     container_name: gitlab
+    hostname: 'localhost'
     build: 
       context: .
       network: host
@@ -10,16 +11,9 @@ services:
       args:
         - DEV_gitlab=1
     ipc: host
-    environment:
-    #- AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-    #- AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-    - HOME=/app
-    - DATA=/app/data
+    env_file: "gitlab.env"
     ports:
-      - "8888:8888"
-      - "80:80"
-      - "443:443"
-      - "22:22"
+      - "8000:80"
     volumes:
       - .:/app
       - $HOME/data/gitlabdata:/app/data
