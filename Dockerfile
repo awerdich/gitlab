@@ -1,4 +1,4 @@
-FROM gitlab/gitlab-ce:17.2.8-ce.0 AS base
+FROM gitlab/gitlab-ce:latest AS base
 
 ARG DEV_gitlab
 
@@ -15,11 +15,15 @@ ENV \
     NO_COLOR=true \
     PIPENV_NOSPIN=true
 
-# Port for JupyterLab server
-EXPOSE 8888
-
 RUN mkdir -p /app
 WORKDIR /app
+EXPOSE 80
+
+# System dependencies
+RUN apt-get update -y && \
+        apt-get upgrade -y && \
+        apt-get install -y \
+        'vim'
 
 # Pip and pipenv
 # RUN pip install --upgrade pip
